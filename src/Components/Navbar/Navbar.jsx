@@ -21,12 +21,12 @@ export const Navbar = () => {
   return (
     <div className="navbarWrapper">
       <div className="backClicker" onClick={() => navigate(-1)}>
-        <button>
+        <div className="button">
           <div className="backButtonMerger">
             <IoArrowBackCircleOutline />
             {width > 500 && <h3>Back</h3>}
           </div>
-        </button>
+        </div>
       </div>
       <div className="navigationLinks">
         <NavLink className="removeTextDecoration" to={productsRoutePath}>

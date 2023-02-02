@@ -10,7 +10,7 @@
     text-decoration: none;
 }
 
-.navbarWrapper button {
+.navbarWrapper .button {
     background-color: black;
 }
 
@@ -41,8 +41,8 @@
 }
 
 .navbarWrapper a h3,
-.navbarWrapper button h3,
-.navbarWrapper button svg {
+.navbarWrapper .button h3,
+.navbarWrapper .button svg {
     font-size: 20px;
     color: white;
     font-weight: 500;
@@ -50,11 +50,11 @@
     border-bottom: 3px solid black;
 }
 
-.navbarWrapper button h3 {
+.navbarWrapper .button h3 {
     margin: 0 !important;
 }
 
-.navbarWrapper button svg {
+.navbarWrapper .button svg {
     margin: 0 3px 0 0;
     font-size: 27px;
 }
@@ -68,7 +68,7 @@
 }
 
 @media only screen and (max-width:500px) and (min-width:0px) {
-    .navbarWrapper button svg {
+    .navbarWrapper .button svg {
         margin: 0;
         font-size: 30px;
         padding-top: 5px;
