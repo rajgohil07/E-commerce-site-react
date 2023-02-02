@@ -4,9 +4,14 @@ import { Box } from "@mui/material";
 export const ProductPriceQuestionMark = ({
   price = 0,
   discountPercentage = 0,
+  isCalculationRequired = true,
+  calculatedDiscountPrice = 0,
 }) => {
   const originalPrice = price;
-  const MRPPrice = (price * (100 + discountPercentage)) / 100;
+  let MRPPrice = calculatedDiscountPrice;
+  if (isCalculationRequired) {
+    MRPPrice = (price * (100 + discountPercentage)) / 100;
+  }
   return (
     <div
       className="priceQuestionMarkChecker"
@@ -39,11 +44,12 @@ export const ProductPriceQuestionMark = ({
       <div className="liner"></div>
       <div className="preFixerSaverTextWrapper">
         <span className="preFixerSaverText">
-          Overall you will save{" "}
+          Overall, you will save{" "}
           <span>
-            ${(MRPPrice - originalPrice).toFixed(0)} ({discountPercentage}%)
+            ${(MRPPrice - originalPrice).toFixed(0)} (
+            {discountPercentage.toFixed(2)}%)
           </span>{" "}
-          on this product
+          {isCalculationRequired ? "on this product!" : "on those products!"}
         </span>
       </div>
     </div>

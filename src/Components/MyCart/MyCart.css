@@ -1,4 +1,66 @@
 .myCartWrapper {
     width: 80%;
-    margin: 3.5rem auto 2rem auto;
+    margin: 0rem auto;
+}
+
+.myCartWrapper .myCartHeading,
+.myCartWrapper .myCartPriceSummary {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.myCartWrapper .myCartHeading {
+    border-bottom: 2px solid grey;
+}
+
+.myCartWrapper .priceSummaryAndIconMerger {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid grey;
+    margin: 3rem 0;
+}
+
+.myCartWrapper .priceSummaryAndIconMerger svg {
+    font-size: 20px;
+    margin: 0.8rem 0rem 0rem 0.5rem;
+}
+
+.myCartWrapper .myCartPriceSummary {
+    margin: 0rem;
+}
+
+.myCartWrapper .priceSummaryHeading,
+.myCartWrapper .priceSummaryRightFloater {
+    font-size: 24px;
+    font-weight: 500;
+    padding: 0 0 0.5rem 0 !important;
+}
+
+.myCartWrapper .priceSummaryRightFloater {
+    text-align: end;
+}
+
+.myCartWrapper .priceSummaryTotalSaving {
+    color: green;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 0 0 0.5rem 0 !important;
+    text-align: end;
+}
+
+.myCartWrapper .underline {
+    border-bottom: 2px solid grey;
+}
+
+.myCartWrapper .myCartSavePrice {
+    font-size: 20px;
+    font-weight: 500;
+    color: green;
+    margin: 0.5rem 0 2rem 0;
+}
+
+@media only screen and (max-width:500px) {
+    .myCartWrapper {
+        width: 95%;
+    }
 }

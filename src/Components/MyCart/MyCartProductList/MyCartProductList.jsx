@@ -88,13 +88,16 @@ export const MyCartProductList = ({ data }) => {
             <span className="originalAmount">
               $
               {(
-                (data.productInfo.price *
+                ((data.productInfo.price *
                   (100 + data.productInfo.discountPercentage)) /
-                  100 || 0
+                  100 || 0) * Number(data.quantity || 1)
               ).toFixed(0)}
             </span>
             <span className="discountedAmount">
-              ${(data.productInfo.price || 0).toFixed(0)}
+              $
+              {(
+                (data.productInfo.price || 0) * Number(data.quantity || 1)
+              ).toFixed(0)}
             </span>
             <span className="discountPercentage">
               {data.productInfo.discountPercentage}% off
