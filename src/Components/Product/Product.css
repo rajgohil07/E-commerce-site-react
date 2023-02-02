@@ -52,12 +52,18 @@
 .productDetails>div>.pricePercentageOff {
     font-size: 17px;
     margin-left: 0.5rem;
+    margin-right: 0.5rem;
     color: orangered;
     font-weight: 600;
 }
 
+.productDetails .questionMarkIcon {
+    font-size: 1.2rem;
+    margin-bottom: -0.25rem;
+}
+
 .productTable {
-    margin: 2rem 0rem;
+    margin: 1rem 0rem;
 }
 
 .productTable .additionalInfo {
@@ -68,4 +74,8 @@
 .productTable .productInfoTitle {
     font-weight: 600;
     width: 15rem;
+}
+
+.addToCartButtonSetter {
+    margin-top: 1rem;
 }

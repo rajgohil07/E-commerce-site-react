@@ -7,10 +7,16 @@ import { Alert, Box, Rating } from "@mui/material";
 import { Loader } from "../Loader/Loader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
+import { BsInfoCircle } from "react-icons/bs";
+import { BootstrapTooltip } from "../BootstrapTooltip/BootstrapTooltip";
+import { ProductPriceQuestionMark } from "./ProductPriceQuestionMark/ProductPriceQuestionMark";
+
+// CSS imports
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./Product.css";
+import { AddToCartButton } from "./AddToCartButton/AddToCartButton";
 
 export const Product = () => {
   const navigate = useNavigate();
@@ -55,6 +61,7 @@ export const Product = () => {
 
   return (
     <>
+      {/* Error Boundaries  */}
       <div className="productWrapper">
         {isLoading && <Loader />}
         {fetchError && (
@@ -68,6 +75,8 @@ export const Product = () => {
           </Alert>
         )}
       </div>
+
+      {/* Swipper integration  */}
       <div className="swipperWrapper">
         <Swiper
           slidesPerView={1}
@@ -86,6 +95,8 @@ export const Product = () => {
           ))}
         </Swiper>
       </div>
+
+      {/* Product details  */}
       <div className="productWrapper">
         <Box className="productDetails">
           <h1>{productData.title}</h1>
@@ -101,6 +112,8 @@ export const Product = () => {
               <p>({productData.rating} ratings)</p>
             </span>
           </Box>
+
+          {/* Product price  */}
           <Box sx={{ display: "flex", alignItems: "baseline" }}>
             <h3> ${productData.price}</h3>
             <span className="productPrice">
@@ -113,7 +126,31 @@ export const Product = () => {
             <span className="pricePercentageOff">
               ({productData.discountPercentage}% off)
             </span>
+
+            {/* Bootstrap Tool tip */}
+            <BootstrapTooltip
+              title={
+                <ProductPriceQuestionMark
+                  price={productData.price}
+                  discountPercentage={productData.discountPercentage}
+                />
+              }
+              placement="top"
+              arrow
+            >
+              <div>
+                <BsInfoCircle className="questionMarkIcon" />
+              </div>
+            </BootstrapTooltip>
           </Box>
+
+          {/* Add to cart button  */}
+          <AddToCartButton
+            buttonName={"add to cart"}
+            paddingSetterClassName="addToCartButtonSetter"
+          />
+
+          {/* Additional info table  */}
           <table border={0} className="productTable">
             <thead>
               <tr>

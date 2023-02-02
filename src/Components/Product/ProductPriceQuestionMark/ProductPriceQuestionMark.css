@@ -1,0 +1,37 @@
+.priceQuestionMarkChecker {
+    padding: 1rem;
+    width: 15rem;
+}
+
+.priceQuestionMarkChecker .preFixer {
+    white-space: pre-line;
+}
+
+.priceQuestionMarkChecker .priceDetails {
+    white-space: pre-line;
+}
+
+.priceQuestionMarkChecker .cutMRPText {
+    text-decoration: line-through !important;
+}
+
+.priceQuestionMarkChecker .liner {
+    padding: 0.5rem 0rem;
+    border-bottom: 1px solid lightgrey;
+}
+
+.priceQuestionMarkChecker .preFixerSaverTextWrapper {
+    margin-top: 0.5rem;
+}
+
+.priceQuestionMarkChecker .preFixerSaverText {
+    white-space: pre-line;
+    padding-top: 0.5rem;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.priceQuestionMarkChecker .preFixerSaverText>span {
+    color: #2eba2e;
+    font-weight: bold;
+}

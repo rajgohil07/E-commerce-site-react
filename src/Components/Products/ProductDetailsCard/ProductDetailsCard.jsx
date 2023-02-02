@@ -6,13 +6,11 @@ import {
   CardContent,
   CardMedia,
   Zoom,
-  Tooltip,
   Typography,
-  styled,
-  tooltipClasses,
   Rating,
   Grid,
 } from "@mui/material";
+import { BootstrapTooltip } from "../../BootstrapTooltip/BootstrapTooltip";
 
 export const ProductDetailsCard = ({
   id,
@@ -23,17 +21,6 @@ export const ProductDetailsCard = ({
   thumbnail,
 }) => {
   const navigate = useNavigate();
-  const BootstrapTooltip = styled(({ className, ...props }) => (
-    <Tooltip {...props} classes={{ popper: className }} />
-  ))(({ theme }) => ({
-    [`& .${tooltipClasses.arrow}`]: {
-      color: "black",
-    },
-    [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: "black",
-      fontSize: "15px",
-    },
-  }));
 
   return (
     <BootstrapTooltip

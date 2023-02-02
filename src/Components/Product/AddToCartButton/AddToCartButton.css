@@ -1,0 +1,41 @@
+.addToCartButtonWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(213, 162, 67);
+    width: 13rem;
+    padding: 1rem 0;
+    border: 2px solid white;
+}
+
+.addToCartButtonWrapper>span {
+    margin-left: 1rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: white;
+}
+
+.addToCartButtonWrapper>svg {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.addToCartButtonWrapper:hover {
+    background-color: white;
+    border: 2px solid rgb(213, 162, 67);
+}
+
+.addToCartButtonWrapper:hover span,
+.addToCartButtonWrapper:hover svg {
+    color: rgb(213, 162, 67);
+}
+
+.addToCartButtonWrapper:hover span,
+.addToCartButtonWrapper:hover svg,
+.addToCartButtonWrapper:hover,
+.addToCartButtonWrapper>svg,
+.addToCartButtonWrapper>span,
+.addToCartButtonWrapper {
+    transition: all 300ms ease-in-out;
+}
