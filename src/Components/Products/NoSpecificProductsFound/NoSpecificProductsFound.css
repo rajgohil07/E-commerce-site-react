@@ -6,4 +6,5 @@
     text-decoration: none;
     color: inherit;
     cursor: pointer;
+    border-bottom: 1px grey solid;
 }

@@ -8,7 +8,7 @@ export const NoSpecificProductsFound = ({
 }) => {
   return (
     <p className="noSpecificProductsFound">
-      Sorry, no product was found for your match.
+      Sorry, no product was found for your match.{" "}
       <span
         to={productsRoutePath}
         onClick={() => {
@@ -17,9 +17,9 @@ export const NoSpecificProductsFound = ({
           changeIsKeyPress((state) => !state);
         }}
       >
-        {" "}
-        Click here to see the available products.
-      </span>
+        Click here
+      </span>{" "}
+      to see the available products.
     </p>
   );
 };
