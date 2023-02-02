@@ -7,6 +7,7 @@ import { ProductDetailsCard } from "./ProductDetailsCard/ProductDetailsCard";
 import { ProductsListLimit } from "./ProductsListLimit/ProductsListLimit";
 import { ProductsPagination } from "./ProductsPagination/ProductsPagination";
 import { Loader } from "../Loader/Loader";
+import { productsActions } from "../../Redux/Products/ProductsActionTypes";
 
 export const Products = () => {
   const dispatch = useDispatch();
@@ -23,12 +24,16 @@ export const Products = () => {
     setWidth(screenWidthRef.current.getBoundingClientRect().width);
   }, []);
 
+  const [isKeyPress, changeIsKeyPress] = useState(false);
+
   useEffect(() => {
+    dispatch({ type: productsActions.SET_LOADER_TRUE });
     setTimeout(() => {
       dispatch(fetchProducts(limit, currentPage, searchValue));
     }, 1100);
+    changeIsKeyPress(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [limit, currentPage, searchValue]);
+  }, [limit, currentPage, isKeyPress]);
 
   useEffect(() => {
     changeCurrentPage(1);
@@ -52,7 +57,14 @@ export const Products = () => {
             variant="outlined"
             fullWidth
             value={searchValue}
-            onChange={(e) => changeSearchValue(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                changeIsKeyPress(true);
+              }
+            }}
+            onChange={(e) => {
+              changeSearchValue(e.target.value);
+            }}
             sx={{ marginTop: "2rem", marginBottom: "2rem" }}
           />
           <Alert

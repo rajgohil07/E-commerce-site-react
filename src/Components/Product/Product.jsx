@@ -48,13 +48,14 @@ export const Product = () => {
       try {
         const { data } = await axios(config);
         updateProductData(data);
+        dispatch({ type: productsActions.SET_LOADER_FALSE });
         return data;
       } catch (error) {
         console.error(`Unable to find product by id:${productId}`, error);
         updateError(true);
+        return dispatch({ type: productsActions.SET_LOADER_FALSE });
       }
     }, 1100);
-    dispatch({ type: productsActions.SET_LOADER_FALSE });
   };
 
   useEffect(() => {
@@ -86,7 +87,7 @@ export const Product = () => {
         )}
       </div>
 
-      {!fetchError && (
+      {!fetchError && !isLoading && (
         <div className="mainProductParentWrapper">
           {/* Swipper integration  */}
           <div className="swipperWrapper">

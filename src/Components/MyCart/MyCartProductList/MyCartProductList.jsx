@@ -50,7 +50,6 @@ export const MyCartProductList = ({ data, setSnackbar, snackMessageRef }) => {
 
   // Show snack case message
   const handleSnackCaseMessage = (title, quantity, type) => {
-    console.log("quantity :>> ", quantity);
     if (type === snackCaseMessageType.ADD) {
       snackMessageRef.current = `Quantity of ${title} has been increased!`;
     } else {
