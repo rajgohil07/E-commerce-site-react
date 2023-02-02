@@ -43,7 +43,6 @@ export const Product = () => {
       };
       try {
         const { data } = await axios(config);
-        console.log("data", data);
         updateProductData(data);
         return data;
       } catch (error) {
@@ -148,6 +147,7 @@ export const Product = () => {
           <AddToCartButton
             buttonName={"add to cart"}
             paddingSetterClassName="addToCartButtonSetter"
+            productData={productData}
           />
 
           {/* Additional info table  */}

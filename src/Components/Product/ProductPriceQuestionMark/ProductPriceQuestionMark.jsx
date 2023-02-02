@@ -12,7 +12,7 @@ export const ProductPriceQuestionMark = ({
       className="priceQuestionMarkChecker"
       sx={{ padding: 2, width: "15rem" }}
     >
-      <span className="priceDetails">Price details</span>
+      <span className="priceDetails">Price Details</span>
       <div className="liner"></div>
       <Box
         sx={{
@@ -22,7 +22,7 @@ export const ProductPriceQuestionMark = ({
           justifyContent: "space-between",
         }}
       >
-        <span className="preFixer">Maximum retail price:</span>
+        <span className="preFixer">Maximum Retail Price:</span>
         <span className="preFixer cutMRPText">{`$${MRPPrice.toFixed(0)}`}</span>
       </Box>
       <Box
@@ -33,7 +33,7 @@ export const ProductPriceQuestionMark = ({
           justifyContent: "space-between",
         }}
       >
-        <span className="preFixer">Discounted price:</span>
+        <span className="preFixer">Discounted Price:</span>
         <span className="preFixer">{`$${originalPrice}`}</span>
       </Box>
       <div className="liner"></div>

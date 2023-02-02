@@ -1,0 +1,63 @@
+.myCartWrapper .leftPart {}
+
+.myCartWrapper .leftPart .leftImagePart {
+    width: 100%;
+    height: 100%;
+    background-color: #cac7c7;
+}
+
+.myCartWrapper .leftPart .leftImagePart img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.leftPart .quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.leftPart .quantity .quantityButton {
+    margin: 0 1.5rem;
+    padding: 0.25rem 1.2rem;
+    transition: all 300ms ease-in-out;
+}
+
+.leftPart .quantity .quantityButton:disabled {
+    background-color: grey;
+}
+
+.leftPart .quantity .quantityButton:hover {
+    padding: 0.25rem 1.2rem;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+}
+
+.leftPart .quantity .quantityButton:disabled:hover {
+    cursor: not-allowed;
+}
+
+.leftPart .quantity .quantityButtonMinus {
+    background-color: orangered;
+    border: 2px solid white;
+    font-size: 30px;
+}
+
+.leftPart .quantity .quantityButtonMinus:hover {
+    background-color: white;
+    border: 2px solid orangered;
+    color: orangered;
+}
+
+.leftPart .quantity .quantityButtonPlus {
+    background-color: green;
+    border: 2px solid white;
+    font-size: 30px;
+}
+
+.leftPart .quantity .quantityButtonPlus:hover {
+    background-color: white;
+    border: 2px solid green;
+    color: green;
+}

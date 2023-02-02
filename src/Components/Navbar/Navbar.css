@@ -10,13 +10,17 @@
     text-decoration: none;
 }
 
-.navbarWrapper>a>h3 {
+.navbarWrapper a h3 {
     color: white;
     font-weight: 500;
     margin: 0 2rem;
     border-bottom: 3px solid black;
 }
 
-.navbarWrapper>.active>h3 {
+.navbarWrapper a .myCartBadge {
+    margin: 0rem !important;
+}
+
+.navbarWrapper .active h3 {
     border-bottom: 3px solid white;
 }
