@@ -1,0 +1,22 @@
+.navbarWrapper {
+    height: 50px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbarWrapper>a {
+    text-decoration: none;
+}
+
+.navbarWrapper>a>h3 {
+    color: white;
+    font-weight: 500;
+    margin: 0 2rem;
+    border-bottom: 3px solid black;
+}
+
+.navbarWrapper>.active>h3 {
+    border-bottom: 3px solid white;
+}

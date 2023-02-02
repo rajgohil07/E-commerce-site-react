@@ -1,0 +1,20 @@
+.footerWrapper {
+    height: 50px;
+    background-color: black;
+}
+
+.footerFlexer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.footerText>h3 {
+    color: white;
+    font-weight: 500;
+    margin: 0;
+    padding: 0 1rem;
+    font-size: 15px;
+}
