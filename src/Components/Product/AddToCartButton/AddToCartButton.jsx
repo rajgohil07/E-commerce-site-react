@@ -2,25 +2,28 @@ import "./AddToCartButton.css";
 import { useDispatch, useSelector } from "react-redux";
 import { BsFillCartFill } from "react-icons/bs";
 import { alterTheValueOfMyCart } from "../../../Redux/MyCart/MyCartThunkMiddleware";
+import { OrderLimitTooltip } from "../../OrderLimitTooltip/OrderLimitTooltip";
+import { Box } from "@mui/material";
+import { handleSnackbar } from "../../../Redux/AdditionalUtilities/AdditionalUtilitiesMiddleware";
 import {
   myCartActionTypes,
   myCartProductActionType,
 } from "../../../Redux/MyCart/MyCartActionTypes";
-import { OrderLimitTooltip } from "../../OrderLimitTooltip/OrderLimitTooltip";
-import { Box } from "@mui/material";
-import { additionalUtilitiesActionType } from "../../../Redux/AdditionalUtilities/AdditionalUtilitiesActionTypes";
 
 export const AddToCartButton = ({ buttonName, productData }) => {
+  // Redux dispatch and selector hooks
   const dispatch = useDispatch();
+  const width = useSelector((state) => state.utilities.width);
   const cartState = useSelector((state) => state.myCart.myProductsData);
+
   const findProduct = cartState.find((data) => {
     return data.productInfo.id === productData.id;
   });
   const isButtonDisabled = Number(findProduct?.quantity) >= 3;
-  const width = useSelector((state) => state.utilities.width);
 
   const handleAddToCartEvent = () => {
     if (!isButtonDisabled) {
+      const snackMessage = `${productData.title} has been added to your cart!`;
       dispatch(
         alterTheValueOfMyCart(
           productData,
@@ -29,11 +32,8 @@ export const AddToCartButton = ({ buttonName, productData }) => {
           myCartActionTypes.ALTER_PRODUCT_TO_MY_CART
         )
       );
-      dispatch({
-        type: additionalUtilitiesActionType.SET_MESSAGE_TO_SNACKBAR,
-        snackBarMessage: `${productData.title} has been added to your cart!`,
-        snackBarTypeSuccess: true,
-      });
+      // Calling an dispatch method of redux to display the snackbar
+      dispatch(handleSnackbar(snackMessage, true));
     }
   };
 

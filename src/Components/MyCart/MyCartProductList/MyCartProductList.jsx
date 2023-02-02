@@ -7,7 +7,7 @@ import { OrderLimitTooltip } from "../../OrderLimitTooltip/OrderLimitTooltip";
 import { useNavigate } from "react-router-dom";
 import { publicURLPath } from "../../../Constants/PathConstants";
 import { BootstrapTooltip } from "../../BootstrapTooltip/BootstrapTooltip";
-import { additionalUtilitiesActionType } from "../../../Redux/AdditionalUtilities/AdditionalUtilitiesActionTypes";
+import { handleSnackbar } from "../../../Redux/AdditionalUtilities/AdditionalUtilitiesMiddleware";
 import {
   myCartActionTypes,
   myCartProductActionType,
@@ -64,11 +64,7 @@ export const MyCartProductList = ({ data }) => {
       }
     }
     // Calling an dispatch method of redux to display the snackbar
-    dispatch({
-      type: additionalUtilitiesActionType.SET_MESSAGE_TO_SNACKBAR,
-      snackBarTypeSuccess: true,
-      snackBarMessage,
-    });
+    dispatch(handleSnackbar(snackBarMessage, true));
   };
 
   return (

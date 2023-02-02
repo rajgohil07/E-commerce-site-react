@@ -8,9 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { SnackBar } from "../SnackBar/SnackBar";
 
 export const ParentComponent = () => {
+  // Redux dispatch and selector hooks
   const dispatch = useDispatch();
-  const screenWidthRef = useRef(1300);
   const utilities = useSelector((state) => state.utilities);
+
+  // React useRef hook
+  const screenWidthRef = useRef(1300);
 
   // React useEffect hook
   useEffect(() => {

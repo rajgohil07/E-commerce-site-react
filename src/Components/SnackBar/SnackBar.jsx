@@ -1,6 +1,7 @@
-import { Alert, Snackbar } from "@mui/material";
 import "./SnackBar.css";
+import { Alert, Snackbar } from "@mui/material";
 import { useSelector } from "react-redux";
+import Slide from "@mui/material/Slide";
 
 export const SnackBar = ({
   isOpen,
@@ -9,10 +10,12 @@ export const SnackBar = ({
   isSuccess = true,
 }) => {
   const width = useSelector((state) => state.utilities.width);
+  const key = new Date().getTime();
 
   return (
     <div>
       <Snackbar
+        key={key}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={isOpen}
         autoHideDuration={7000}
@@ -23,6 +26,10 @@ export const SnackBar = ({
           marginTop: width > 700 ? "0px" : "60px",
         }}
         className={isSuccess ? "snackIconColorSuccess" : "snackIconColorError"}
+        TransitionComponent={(props) => {
+          console.log("props", props);
+          return <Slide {...props} direction="down" />;
+        }}
       >
         <Alert
           onClose={() => handleClose(false)}
