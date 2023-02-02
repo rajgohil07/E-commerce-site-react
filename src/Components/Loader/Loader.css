@@ -1,10 +1,3 @@
-.loaderWrapper {
-    width: 100vw;
-    height: calc(100vh - 5rem);
-    background-color: rgba(0, 0, 0, 0.5);
-    position: absolute;
-}
-
 .loader {
     z-index: 9999;
     position: absolute;

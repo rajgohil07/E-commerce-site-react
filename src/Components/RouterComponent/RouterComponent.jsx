@@ -1,5 +1,3 @@
-import { Loader } from "../Loader/Loader";
-import { useSelector } from "react-redux";
 import "./RouterComponent.css";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "../Home/Home";
@@ -14,11 +12,8 @@ import {
 } from "../../Constants/PathConstants";
 
 export const RouterComponent = () => {
-  const isLoader = useSelector((state) => state.products.isLoading);
-
   return (
     <div className="routerComponent">
-      {isLoader && <Loader />}
       <div>
         <Routes>
           <Route path={homeRoutePath} element={<Home />} />

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import "./ProductDetailsCard.css";
 import {
   Card,
@@ -14,12 +15,14 @@ import {
 } from "@mui/material";
 
 export const ProductDetailsCard = ({
+  id,
   title,
   description,
   rating,
   price,
   thumbnail,
 }) => {
+  const navigate = useNavigate();
   const BootstrapTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
   ))(({ theme }) => ({
@@ -34,6 +37,9 @@ export const ProductDetailsCard = ({
 
   return (
     <BootstrapTooltip
+      onClick={() => {
+        navigate(`/product/${id}`);
+      }}
       title={`Click to buy ${title}`}
       TransitionComponent={Zoom}
       TransitionProps={{ timeout: 500 }}
@@ -46,7 +52,7 @@ export const ProductDetailsCard = ({
             component="img"
             height="150"
             image={thumbnail}
-            alt="Galaxy S22 Ultra"
+            alt="Preview of product"
           />
           <CardContent>
             <Typography my={0} gutterBottom variant="h5" component="div">
