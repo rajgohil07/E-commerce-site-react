@@ -1,0 +1,14 @@
+.priceTextSetter>span {
+    font-weight: bold;
+}
+
+.toolTipColorSetter {
+    color: black;
+}
+
+.priceTextSetter,
+.rattingTextSetter {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+}

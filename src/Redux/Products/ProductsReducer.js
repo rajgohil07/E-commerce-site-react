@@ -2,7 +2,7 @@ import { productsActions } from "./ProductsActionTypes";
 
 const initialState = {
   isLoading: true,
-  productsData: [],
+  productsData: { products: [] },
 };
 
 export const productsReducer = (state = initialState, action) => {
