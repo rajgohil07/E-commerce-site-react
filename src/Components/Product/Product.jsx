@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { productsActions } from "../../Redux/Products/ProductsActionTypes";
-import { Alert } from "@mui/material";
+import { Alert, Box, Rating } from "@mui/material";
 import { Loader } from "../Loader/Loader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
@@ -19,6 +19,8 @@ export const Product = () => {
 
   const [productData, updateProductData] = useState({
     images: [],
+    rating: 0,
+    discountPercentage: 0,
   });
   const [fetchError, updateError] = useState(false);
 
@@ -35,6 +37,7 @@ export const Product = () => {
       };
       try {
         const { data } = await axios(config);
+        console.log("data", data);
         updateProductData(data);
         return data;
       } catch (error) {
@@ -64,24 +67,81 @@ export const Product = () => {
             here to go back where you left.
           </Alert>
         )}
-        <div className="swipperWrapper">
-          <Swiper
-            slidesPerView={1}
-            spaceBetween={30}
-            loop={true}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
-          >
-            {productData.images.map((data) => (
-              <SwiperSlide key={data}>
-                <img src={data} alt="" />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+      </div>
+      <div className="swipperWrapper">
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={30}
+          loop={true}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+        >
+          {productData.images.map((data) => (
+            <SwiperSlide key={data}>
+              <img src={data} alt="" />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+      <div className="productWrapper">
+        <Box className="productDetails">
+          <h1>{productData.title}</h1>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Rating
+              name="read-only"
+              precision={0.1}
+              size="normal"
+              value={productData.rating}
+              readOnly
+            />
+            <span>
+              <p>({productData.rating} ratings)</p>
+            </span>
+          </Box>
+          <Box sx={{ display: "flex", alignItems: "baseline" }}>
+            <h3> ${productData.price}</h3>
+            <span className="productPrice">
+              $
+              {`${(
+                (productData.price * (100 + productData.discountPercentage)) /
+                100
+              ).toFixed(0)}`}
+            </span>
+            <span className="pricePercentageOff">
+              ({productData.discountPercentage}% off)
+            </span>
+          </Box>
+          <table border={0} className="productTable">
+            <thead>
+              <tr>
+                <td colSpan={2} className="additionalInfo">
+                  Product Additional Info <hr />
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="productInfoTitle">Product Brand</td>
+                <td>{productData.brand || ""}</td>
+              </tr>
+              <tr>
+                <td className="productInfoTitle">Product Description</td>
+                <td>{productData.description || ""}</td>
+              </tr>
+              <tr>
+                <td className="productInfoTitle">Product Category</td>
+                <td>{productData.category || ""}</td>
+              </tr>
+              <tr>
+                <td className="productInfoTitle">Available Stock</td>
+                <td>{productData.stock || ""}</td>
+              </tr>
+            </tbody>
+          </table>
+        </Box>
       </div>
     </>
   );

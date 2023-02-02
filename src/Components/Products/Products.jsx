@@ -93,6 +93,7 @@ export const Products = () => {
             justifyContent="space-between"
             alignItems="center"
             mt={5}
+            mb={3}
             flexWrap={"nowrap"}
             sx={{ width: "100%" }}
           >

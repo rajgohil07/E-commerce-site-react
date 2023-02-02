@@ -4,17 +4,68 @@
 }
 
 .swiper {
-    height: 27rem;
+    height: 25rem;
+    background-color: #cac7c7;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    color: black;
 }
 
 .swiper-slide img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .swipperWrapper {
     width: 100% !important;
     height: 30% !important;
+}
+
+.productDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.productDetails>h1 {
+    margin-bottom: 0rem;
+}
+
+.productDetails>div>h3 {
+    margin: 0rem;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.productDetails>div>.productPrice {
+    margin: 0rem;
+    font-size: 17px;
+    margin-left: 0.5rem;
+    color: grey;
+    text-decoration: line-through;
+}
+
+.productDetails>div>.pricePercentageOff {
+    font-size: 17px;
+    margin-left: 0.5rem;
+    color: orangered;
+    font-weight: 600;
+}
+
+.productTable {
+    margin: 2rem 0rem;
+}
+
+.productTable .additionalInfo {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.productTable .productInfoTitle {
+    font-weight: 600;
+    width: 15rem;
 }
