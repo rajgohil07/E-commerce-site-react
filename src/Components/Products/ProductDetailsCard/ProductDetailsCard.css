@@ -12,3 +12,7 @@
     font-weight: 500 !important;
     margin: 0 !important;
 }
+
+.cardMediaImage {
+    object-fit: contain;
+}

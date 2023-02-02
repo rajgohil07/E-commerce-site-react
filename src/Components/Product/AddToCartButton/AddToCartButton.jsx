@@ -6,12 +6,10 @@ import {
   myCartActionTypes,
   myCartProductActionType,
 } from "../../../Redux/MyCart/MyCartActionTypes";
+import { OrderLimitTooltip } from "../../OrderLimitTooltip/OrderLimitTooltip";
+import { Box } from "@mui/material";
 
-export const AddToCartButton = ({
-  buttonName,
-  paddingSetterClassName,
-  productData,
-}) => {
+export const AddToCartButton = ({ buttonName, productData }) => {
   const dispatch = useDispatch();
 
   const cartState = useSelector((state) => state.myCart.myProductsData);
@@ -27,13 +25,31 @@ export const AddToCartButton = ({
     );
   };
 
+  const findProduct = cartState.find(
+    (data) => data.productInfo.id === productData.id
+  );
+
+  const isButtonDisabled = Number(findProduct?.quantity) >= 3;
+
   return (
-    <div
-      onClick={() => handleAddToCartEvent()}
-      className={`addToCartButtonWrapper ${paddingSetterClassName}`}
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        marginTop: "1rem",
+      }}
     >
-      <BsFillCartFill />
-      <span>{buttonName}</span>
-    </div>
+      <div
+        onClick={() => handleAddToCartEvent()}
+        className={`addToCartButtonWrapper ${
+          isButtonDisabled ? "disableAddToCartButton" : ""
+        }`}
+      >
+        <BsFillCartFill />
+        <span>{buttonName}</span>
+      </div>
+      <OrderLimitTooltip title="Due to high demand, you cannot add more than 3 quantities of this product." />
+    </Box>
   );
 };

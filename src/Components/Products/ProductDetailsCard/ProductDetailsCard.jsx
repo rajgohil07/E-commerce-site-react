@@ -36,6 +36,7 @@ export const ProductDetailsCard = ({
       <Card>
         <CardActionArea>
           <CardMedia
+            className="cardMediaImage"
             component="img"
             height="150"
             image={thumbnail}

@@ -146,7 +146,6 @@ export const Product = () => {
           {/* Add to cart button  */}
           <AddToCartButton
             buttonName={"add to cart"}
-            paddingSetterClassName="addToCartButtonSetter"
             productData={productData}
           />
 

@@ -19,7 +19,6 @@
 }
 
 .leftPart .quantity .quantityButton {
-    margin: 0 1.5rem;
     padding: 0.25rem 1.2rem;
     transition: all 300ms ease-in-out;
 }
@@ -42,6 +41,7 @@
     background-color: orangered;
     border: 2px solid white;
     font-size: 30px;
+    margin: 0 1.5rem;
 }
 
 .leftPart .quantity .quantityButtonMinus:hover {
@@ -54,10 +54,64 @@
     background-color: green;
     border: 2px solid white;
     font-size: 30px;
+    margin: 0 0.25rem 0 1.5rem;
 }
 
 .leftPart .quantity .quantityButtonPlus:hover {
     background-color: white;
     border: 2px solid green;
     color: green;
+}
+
+.myCartWrapper .rightPart>h3 {
+    font-size: 32px;
+    margin: 0 0 1rem 0;
+}
+
+.myCartWrapper .rightPart>p {
+    margin: 0 0 1rem 0;
+}
+
+.myCartWrapper .rightPart .myCartRating span,
+.myCartWrapper .rightPart svg {
+    color: white;
+}
+
+.myCartWrapper .rightPart svg {
+    margin-left: 0.3rem;
+    font-size: 20px;
+}
+
+.myCartWrapper .rightPart .myCartRating {
+    display: inline-block;
+    padding: 0.3rem 0.5rem;
+    background-color: green;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.rightPart .pricer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.rightPart .originalAmount {
+    font-size: 20px;
+    text-decoration: line-through;
+    margin-right: 0.8rem;
+    color: grey;
+    font-weight: 500;
+}
+
+.rightPart .discountedAmount {
+    font-size: 20px;
+    margin-right: 0.8rem;
+    font-weight: 500;
+}
+
+.rightPart .discountPercentage {
+    font-size: 20px;
+    color: green;
+    font-weight: 500;
 }

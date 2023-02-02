@@ -27,6 +27,22 @@
     border: 2px solid rgb(213, 162, 67);
 }
 
+.disableAddToCartButton {
+    background-color: #ac8e58 !important;
+}
+
+.disableAddToCartButton:hover {
+    border: 2px solid white !important;
+    cursor: not-allowed;
+}
+
+.disableAddToCartButton:hover span,
+.disableAddToCartButton:hover svg {
+    cursor: not-allowed;
+    background-color: #ac8e58 !important;
+    color: white !important;
+}
+
 .addToCartButtonWrapper:hover span,
 .addToCartButtonWrapper:hover svg {
     color: rgb(213, 162, 67);

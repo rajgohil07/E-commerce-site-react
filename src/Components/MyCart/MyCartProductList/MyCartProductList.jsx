@@ -1,11 +1,13 @@
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import "./MyCartProductList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { alterTheValueOfMyCart } from "../../../Redux/MyCart/MyCartThunkMiddleware";
+import { AiFillStar } from "react-icons/ai";
 import {
   myCartActionTypes,
   myCartProductActionType,
 } from "../../../Redux/MyCart/MyCartActionTypes";
+import { OrderLimitTooltip } from "../../OrderLimitTooltip/OrderLimitTooltip";
 
 export const MyCartProductList = ({ data }) => {
   const dispatch = useDispatch();
@@ -28,7 +30,7 @@ export const MyCartProductList = ({ data }) => {
   const handleIncrementQty = () => {
     return dispatch(
       alterTheValueOfMyCart(
-        data,
+        data.productInfo,
         myCartProductActionType.ADD,
         cartState,
         myCartActionTypes.ALTER_PRODUCT_TO_MY_CART
@@ -38,7 +40,7 @@ export const MyCartProductList = ({ data }) => {
 
   return (
     <>
-      <Grid item xs={3} md={4}>
+      <Grid item xs={12} md={4}>
         <div className="leftPart">
           <div className="leftImagePart">
             <img
@@ -62,11 +64,43 @@ export const MyCartProductList = ({ data }) => {
             >
               +
             </button>
+            <OrderLimitTooltip title="Due to high demand, you cannot add more than 3 quantities of this product." />
           </div>
         </div>
       </Grid>
-      <Grid item xs={9} md={8}>
-        Raj
+      <Grid item xs={12} md={8}>
+        <div className="rightPart">
+          <h3>{data.productInfo.title}</h3>
+          <p>{data.productInfo.description}.</p>
+          <div className="myCartRating">
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <span>{data.productInfo.rating}</span>
+              <AiFillStar />
+            </Box>
+          </div>
+          <div className="pricer">
+            <span className="originalAmount">
+              $
+              {(
+                (data.productInfo.price *
+                  (100 + data.productInfo.discountPercentage)) /
+                  100 || 0
+              ).toFixed(0)}
+            </span>
+            <span className="discountedAmount">
+              ${(data.productInfo.price || 0).toFixed(0)}
+            </span>
+            <span className="discountPercentage">
+              {data.productInfo.discountPercentage}% off
+            </span>
+          </div>
+        </div>
       </Grid>
     </>
   );
