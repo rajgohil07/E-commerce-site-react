@@ -15,7 +15,7 @@
 
 .swiper-button-prev:after,
 .swiper-button-next:after {
-    color: black;
+    color: grey;
 }
 
 .swiper-slide img {

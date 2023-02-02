@@ -1,4 +1,11 @@
-.productWrapper {
+.productsWrapper {
     width: 80%;
-    margin: 3rem auto;
+    margin: 0rem auto;
+}
+
+@media only screen and (max-width:500px) and (min-width:0px) {
+    .productsWrapper {
+        width: 90%;
+        margin: 0rem auto;
+    }
 }

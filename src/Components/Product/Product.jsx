@@ -10,31 +10,30 @@ import { Pagination, Navigation } from "swiper";
 import { BsInfoCircle } from "react-icons/bs";
 import { BootstrapTooltip } from "../BootstrapTooltip/BootstrapTooltip";
 import { ProductPriceQuestionMark } from "./ProductPriceQuestionMark/ProductPriceQuestionMark";
+import { AddToCartButton } from "./AddToCartButton/AddToCartButton";
 
 // CSS imports
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./Product.css";
-import { AddToCartButton } from "./AddToCartButton/AddToCartButton";
-import { SnackBar } from "../SnackBar/SnackBar";
 
 export const Product = () => {
+  // React router dom hooks
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { productId } = useParams();
 
+  // Redux dispatch and selector hooks
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.products.isLoading);
+
+  // React use state hooks
+  const [fetchError, updateError] = useState(false);
   const [productData, updateProductData] = useState({
     images: [],
     rating: 0,
     discountPercentage: 0,
   });
-
-  const [fetchError, updateError] = useState(false);
-
-  const [snackBar, setSnackbar] = useState(false);
-
-  const isLoading = useSelector((state) => state.products.isLoading);
 
   const fetchSingleProduct = async () => {
     dispatch({ type: productsActions.SET_LOADER_TRUE });
@@ -58,6 +57,7 @@ export const Product = () => {
     }, 1100);
   };
 
+  // React useEffect hook
   useEffect(() => {
     fetchSingleProduct();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -65,13 +65,6 @@ export const Product = () => {
 
   return (
     <>
-      <SnackBar
-        isOpen={snackBar}
-        isSuccess
-        handleClose={setSnackbar}
-        message={`${productData.title} has been added to your cart!`}
-      />
-
       {/* Error Boundaries  */}
       <div className="productWrapper">
         {isLoading && <Loader />}
@@ -162,7 +155,6 @@ export const Product = () => {
               <AddToCartButton
                 buttonName={"add to cart"}
                 productData={productData}
-                setSnackbar={setSnackbar}
               />
 
               {/* Additional info table  */}

@@ -10,11 +10,53 @@
     text-decoration: none;
 }
 
-.navbarWrapper a h3 {
+.navbarWrapper button {
+    background-color: black;
+}
+
+.navbarWrapper .backButtonMerger {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    padding-top: 0.25rem;
+}
+
+.navbarWrapper .backClicker {
+    cursor: pointer;
+}
+
+.navbarWrapper .navigationLinks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-right: 6rem;
+    height: 100%;
+}
+
+.navbarWrapper .navigationLinks .removeTextDecoration {
+    text-decoration: none;
+}
+
+.navbarWrapper a h3,
+.navbarWrapper button h3,
+.navbarWrapper button svg {
+    font-size: 20px;
     color: white;
     font-weight: 500;
     margin: 0 2rem;
     border-bottom: 3px solid black;
+}
+
+.navbarWrapper button h3 {
+    margin: 0 !important;
+}
+
+.navbarWrapper button svg {
+    margin: 0 3px 0 0;
+    font-size: 27px;
 }
 
 .navbarWrapper a .myCartBadge {
@@ -23,4 +65,16 @@
 
 .navbarWrapper .active h3 {
     border-bottom: 3px solid white;
+}
+
+@media only screen and (max-width:500px) and (min-width:0px) {
+    .navbarWrapper button svg {
+        margin: 0;
+        font-size: 30px;
+        padding-top: 5px;
+    }
+
+    .navbarWrapper .navigationLinks {
+        padding-right: 4rem;
+    }
 }

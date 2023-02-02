@@ -1,23 +1,26 @@
-import { Box, Grid } from "@mui/material";
 import "./MyCartProductList.css";
+import { Box, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { alterTheValueOfMyCart } from "../../../Redux/MyCart/MyCartThunkMiddleware";
 import { AiFillStar } from "react-icons/ai";
-import {
-  myCartActionTypes,
-  myCartProductActionType,
-} from "../../../Redux/MyCart/MyCartActionTypes";
 import { OrderLimitTooltip } from "../../OrderLimitTooltip/OrderLimitTooltip";
 import { useNavigate } from "react-router-dom";
 import { publicURLPath } from "../../../Constants/PathConstants";
 import { BootstrapTooltip } from "../../BootstrapTooltip/BootstrapTooltip";
+import { additionalUtilitiesActionType } from "../../../Redux/AdditionalUtilities/AdditionalUtilitiesActionTypes";
+import {
+  myCartActionTypes,
+  myCartProductActionType,
+} from "../../../Redux/MyCart/MyCartActionTypes";
 
-export const MyCartProductList = ({ data, setSnackbar, snackMessageRef }) => {
-  const dispatch = useDispatch();
-
-  const cartState = useSelector((state) => state.myCart.myProductsData);
-
+export const MyCartProductList = ({ data }) => {
+  // React router dom hooks
   const navigation = useNavigate();
+
+  // Redux dispatch and selector hooks
+  const dispatch = useDispatch();
+  const cartState = useSelector((state) => state.myCart.myProductsData);
+  const width = useSelector((state) => state.utilities.width);
 
   // Handle Decrement Quantity
   const handleDecrementQty = () => {
@@ -43,6 +46,7 @@ export const MyCartProductList = ({ data, setSnackbar, snackMessageRef }) => {
     );
   };
 
+  // Creating the const obj to handle the snackbar messages
   const snackCaseMessageType = Object.freeze({
     ADD: "add",
     REMOVE: "remove",
@@ -50,15 +54,21 @@ export const MyCartProductList = ({ data, setSnackbar, snackMessageRef }) => {
 
   // Show snack case message
   const handleSnackCaseMessage = (title, quantity, type) => {
+    let snackBarMessage;
     if (type === snackCaseMessageType.ADD) {
-      snackMessageRef.current = `Quantity of ${title} has been increased!`;
+      snackBarMessage = `Quantity of ${title} has been increased!`;
     } else {
-      snackMessageRef.current = `Quantity of ${title} has been decreased!`;
-      if (quantity === 0) {
-        snackMessageRef.current = `${title} has been removed from your cart!`;
+      snackBarMessage = `Quantity of ${title} has been decreased!`;
+      if (quantity === 1) {
+        snackBarMessage = `${title} has been removed from your cart!`;
       }
     }
-    setSnackbar(true);
+    // Calling an dispatch method of redux to display the snackbar
+    dispatch({
+      type: additionalUtilitiesActionType.SET_MESSAGE_TO_SNACKBAR,
+      snackBarTypeSuccess: true,
+      snackBarMessage,
+    });
   };
 
   return (
@@ -68,7 +78,7 @@ export const MyCartProductList = ({ data, setSnackbar, snackMessageRef }) => {
           <div className="leftImagePart">
             <BootstrapTooltip
               title={`Click to show the ${data.productInfo.title} product`}
-              placement="top"
+              placement={width > 700 ? "top" : "bottom"}
               arrow
             >
               <img
@@ -86,20 +96,22 @@ export const MyCartProductList = ({ data, setSnackbar, snackMessageRef }) => {
               placement="bottom"
               arrow
             >
-              <button
-                disabled={data.quantity === 0}
-                className="quantityButton quantityButtonMinus"
-                onClick={() => {
-                  handleSnackCaseMessage(
-                    data.productInfo.title,
-                    data.quantity,
-                    snackCaseMessageType.REMOVE
-                  );
-                  handleDecrementQty();
-                }}
-              >
-                -
-              </button>
+              <span>
+                <button
+                  disabled={data.quantity === 0}
+                  className="quantityButton quantityButtonMinus"
+                  onClick={() => {
+                    handleSnackCaseMessage(
+                      data.productInfo.title,
+                      data.quantity,
+                      snackCaseMessageType.REMOVE
+                    );
+                    handleDecrementQty();
+                  }}
+                >
+                  -
+                </button>
+              </span>
             </BootstrapTooltip>
             <h3>Qty: {data.quantity}</h3>
             <BootstrapTooltip
@@ -107,20 +119,22 @@ export const MyCartProductList = ({ data, setSnackbar, snackMessageRef }) => {
               placement="bottom"
               arrow
             >
-              <button
-                disabled={data.quantity >= 3}
-                className="quantityButton quantityButtonPlus"
-                onClick={() => {
-                  handleSnackCaseMessage(
-                    data.productInfo.title,
-                    data.quantity,
-                    snackCaseMessageType.ADD
-                  );
-                  handleIncrementQty();
-                }}
-              >
-                +
-              </button>
+              <Box sx={{ width: "100%", height: "100%" }}>
+                <button
+                  disabled={data.quantity >= 3}
+                  className="quantityButton quantityButtonPlus"
+                  onClick={() => {
+                    handleSnackCaseMessage(
+                      data.productInfo.title,
+                      data.quantity,
+                      snackCaseMessageType.ADD
+                    );
+                    handleIncrementQty();
+                  }}
+                >
+                  +
+                </button>
+              </Box>
             </BootstrapTooltip>
             <OrderLimitTooltip title="Due to high demand, you cannot add more than 3 quantities of this product." />
           </div>
@@ -130,7 +144,7 @@ export const MyCartProductList = ({ data, setSnackbar, snackMessageRef }) => {
         <div className="rightPart">
           <BootstrapTooltip
             title={`Click to show the ${data.productInfo.title} product`}
-            placement="right"
+            placement={width > 700 ? "right" : "bottom"}
             arrow
           >
             <h3

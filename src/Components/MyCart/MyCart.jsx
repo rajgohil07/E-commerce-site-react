@@ -1,29 +1,40 @@
 import "./MyCart.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import { MyCartProductList } from "./MyCartProductList/MyCartProductList";
 import { ProductPriceQuestionMark } from "../Product/ProductPriceQuestionMark/ProductPriceQuestionMark";
 import { BootstrapTooltip } from "../BootstrapTooltip/BootstrapTooltip";
 import { BsInfoCircle } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { productsActions } from "../../Redux/Products/ProductsActionTypes";
+import { Loader } from "../Loader/Loader";
 import {
   productsRoutePath,
   publicURLPath,
 } from "../../Constants/PathConstants";
-import { useNavigate } from "react-router-dom";
-import { SnackBar } from "../SnackBar/SnackBar";
-import { useRef, useState } from "react";
 
 export const MyCart = () => {
+  // React router dom hooks
   const navigate = useNavigate();
 
+  // Redux dispatch and selector hooks
+  const dispatch = useDispatch();
   const myCartArray = useSelector((state) => state.myCart.myProductsData);
-
-  const [snackBar, setSnackbar] = useState(false);
-
-  const snackMessageRef = useRef();
+  const width = useSelector((state) => state.utilities.width);
+  const isLoading = useSelector((state) => state.products.isLoading);
 
   let totalMRPPrice = 0;
   let totalDiscountedPrice = 0;
+
+  // React useEffect hook
+  useEffect(() => {
+    dispatch({ type: productsActions.SET_LOADER_TRUE });
+    setTimeout(() => {
+      dispatch({ type: productsActions.SET_LOADER_FALSE });
+    }, 500);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   myCartArray.forEach((data) => {
     totalDiscountedPrice += (data.quantity || 1) * data.productInfo.price || 0;
@@ -33,14 +44,12 @@ export const MyCart = () => {
         100 || 0);
   });
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="myCartWrapper">
-      <SnackBar
-        isOpen={snackBar}
-        isSuccess
-        handleClose={setSnackbar}
-        message={snackMessageRef.current}
-      />
       {myCartArray?.length > 0 ? (
         <>
           <h3 className="myCartHeading">My Cart</h3>
@@ -48,17 +57,13 @@ export const MyCart = () => {
             return (
               <Grid
                 key={data.productInfo.id}
-                className="myCartWrapper"
+                className="nestedMyCartWrapper"
                 container
                 flexDirection="row"
                 rowSpacing={{ xs: 1, sm: 2, md: 3 }}
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
               >
-                <MyCartProductList
-                  data={data}
-                  setSnackbar={setSnackbar}
-                  snackMessageRef={snackMessageRef}
-                />
+                <MyCartProductList data={data} />
               </Grid>
             );
           })}
@@ -78,7 +83,7 @@ export const MyCart = () => {
                   calculatedDiscountPrice={totalMRPPrice}
                 />
               }
-              placement="right"
+              placement={width > 700 ? "right" : "bottom"}
               arrow
             >
               <div>
@@ -101,7 +106,7 @@ export const MyCart = () => {
             <Grid className="priceSummaryHeading" item xs={6} sm={6}>
               Discounted Price
             </Grid>
-            <Grid className="priceSummaryRightFloater" item sx={6} sm={6}>
+            <Grid className="priceSummaryRightFloater" item xs={6} sm={6}>
               ${totalDiscountedPrice.toFixed(2)}
             </Grid>
             <Grid className="priceSummaryHeading underline" item xs={6} sm={6}>
@@ -110,7 +115,7 @@ export const MyCart = () => {
             <Grid
               className="priceSummaryTotalSaving underline"
               item
-              sx={6}
+              xs={6}
               sm={6}
             >
               ${(totalMRPPrice - totalDiscountedPrice).toFixed(2)} (

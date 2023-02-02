@@ -1,5 +1,11 @@
+import { Provider } from "react-redux";
 import { ParentComponent } from "./Components/ParentComponent/ParentComponent";
+import { store } from "./Redux/ReduxStore";
 
 export const App = () => {
-  return <ParentComponent />;
+  return (
+    <Provider store={store}>
+      <ParentComponent />
+    </Provider>
+  );
 };

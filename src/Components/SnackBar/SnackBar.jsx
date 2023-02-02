@@ -1,5 +1,6 @@
 import { Alert, Snackbar } from "@mui/material";
 import "./SnackBar.css";
+import { useSelector } from "react-redux";
 
 export const SnackBar = ({
   isOpen,
@@ -7,6 +8,8 @@ export const SnackBar = ({
   message,
   isSuccess = true,
 }) => {
+  const width = useSelector((state) => state.utilities.width);
+
   return (
     <div>
       <Snackbar
@@ -14,7 +17,11 @@ export const SnackBar = ({
         open={isOpen}
         autoHideDuration={7000}
         onClose={() => handleClose(false)}
-        sx={{ color: "white", backgroundColor: "green" }}
+        sx={{
+          color: "white",
+          backgroundColor: "green",
+          marginTop: width > 700 ? "0px" : "60px",
+        }}
         className={isSuccess ? "snackIconColorSuccess" : "snackIconColorError"}
       >
         <Alert

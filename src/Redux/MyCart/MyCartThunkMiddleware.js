@@ -44,16 +44,17 @@ export const alterTheValueOfMyCart = (
               if (data.quantity > 1) {
                 data.quantity = data.quantity - 1;
               } else {
-                delete cloneMyCartData[index];
+                // Ref: https://stackoverflow.com/a/5767357
+                cloneMyCartData.splice(index, 1);
               }
             }
           });
         }
       }
     }
-    if (cloneMyCartData.filter((data) => data).length === 0) {
-      cloneMyCartData = [];
-    }
+    // if (cloneMyCartData.filter((data) => data).length === 0) {
+    //   cloneMyCartData = [];
+    // }
     dispatch({ type: myCartActionType, data: cloneMyCartData });
   };
 };

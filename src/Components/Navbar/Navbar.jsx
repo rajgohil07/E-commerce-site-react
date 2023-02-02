@@ -1,13 +1,16 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Badge } from "@mui/material";
 import "./Navbar.css";
 import {
   myCartRoutePath,
   productsRoutePath,
 } from "../../Constants/PathConstants";
-import { useSelector } from "react-redux";
-import { Badge } from "@mui/material";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 export const Navbar = () => {
+  const width = useSelector((state) => state.utilities.width);
+  const navigate = useNavigate();
   const myCartArray = useSelector((state) => state.myCart.myProductsData);
 
   // Array reduce method Ref: https://stackoverflow.com/a/6300596
@@ -17,14 +20,24 @@ export const Navbar = () => {
 
   return (
     <div className="navbarWrapper">
-      <NavLink to={productsRoutePath}>
-        <h3>Products</h3>
-      </NavLink>
-      <NavLink to={myCartRoutePath}>
-        <Badge badgeContent={count} color="success">
-          <h3 className="myCartBadge">My Cart</h3>
-        </Badge>
-      </NavLink>
+      <div className="backClicker" onClick={() => navigate(-1)}>
+        <button>
+          <div className="backButtonMerger">
+            <IoArrowBackCircleOutline />
+            {width > 500 && <h3>Back</h3>}
+          </div>
+        </button>
+      </div>
+      <div className="navigationLinks">
+        <NavLink className="removeTextDecoration" to={productsRoutePath}>
+          <h3>Products</h3>
+        </NavLink>
+        <NavLink className="removeTextDecoration" to={myCartRoutePath}>
+          <Badge badgeContent={count} color="success">
+            <h3 className="myCartBadge">My Cart</h3>
+          </Badge>
+        </NavLink>
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { productsRoutePath } from "../../Constants/PathConstants";
 export const Home = () => {
   const navigate = useNavigate();
 
+  // React useEffect hook
   useEffect(() => {
     navigate(productsRoutePath);
     // eslint-disable-next-line react-hooks/exhaustive-deps
