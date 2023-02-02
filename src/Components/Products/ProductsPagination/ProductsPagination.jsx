@@ -16,7 +16,7 @@ export const ProductsPagination = ({
       count={isNaN(totalPages) ? 10 : totalPages}
       page={currentPage}
       onChange={handleChange}
-      size={width > 500 ? "large" : "small"}
+      size={width > 500 ? "large" : "medium"}
       sx={{
         marginTop: width > 500 ? "0" : "20px",
       }}
