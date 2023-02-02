@@ -8,7 +8,7 @@ import { ProductsListLimit } from "./ProductsListLimit/ProductsListLimit";
 import { ProductsPagination } from "./ProductsPagination/ProductsPagination";
 import { Loader } from "../Loader/Loader";
 import { productsActions } from "../../Redux/Products/ProductsActionTypes";
-import { BootstrapTooltip } from "../BootstrapTooltip/BootstrapTooltip";
+import { NoSpecificProductsFound } from "./NoSpecificProductsFound/NoSpecificProductsFound";
 
 export const Products = () => {
   // React router dom hooks
@@ -45,38 +45,38 @@ export const Products = () => {
         <Loader />
       ) : (
         <>
-          <BootstrapTooltip
-            title={`Click here to check for the particular product.`}
-            placement="bottom"
-            arrow
-          >
-            <TextField
-              label="Search product"
-              type="search"
-              variant="outlined"
-              fullWidth
-              value={searchValue}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  changeIsKeyPress(true);
-                }
-              }}
-              onChange={(e) => {
-                if (isKeyPress) {
-                  changeIsKeyPress(false);
-                }
-                changeSearchValue(e.target.value);
-              }}
-              sx={{ marginTop: "2rem", marginBottom: "2rem" }}
-            />
-          </BootstrapTooltip>
+          <TextField
+            label="Search product"
+            type="search"
+            variant="outlined"
+            fullWidth
+            value={searchValue}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                changeIsKeyPress(true);
+              }
+            }}
+            onChange={(e) => {
+              if (isKeyPress) {
+                changeIsKeyPress(false);
+              }
+              changeSearchValue(e.target.value);
+            }}
+            sx={{ marginTop: "2rem", marginBottom: "2rem" }}
+          />
           <Alert
             sx={{ marginBottom: "2rem" }}
             severity={total > 0 ? "info" : "error"}
           >
-            {total > 0
-              ? `Total discovered ${total} products.`
-              : `Sorry, no product was found for your match.`}
+            {total > 0 ? (
+              `Total discovered ${total} products.`
+            ) : (
+              <NoSpecificProductsFound
+                changeCurrentPage={changeCurrentPage}
+                changeSearchValue={changeSearchValue}
+                changeIsKeyPress={changeIsKeyPress}
+              />
+            )}
           </Alert>
           <Grid
             container

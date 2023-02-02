@@ -1,0 +1,9 @@
+.noSpecificProductsFound {
+    margin: 0;
+}
+
+.noSpecificProductsFound span {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
