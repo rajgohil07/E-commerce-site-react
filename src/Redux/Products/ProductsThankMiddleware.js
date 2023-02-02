@@ -15,7 +15,9 @@ export const fetchProducts = () => {
     };
     const {
       data: { products },
-    } = axios(config);
+    } = await axios(config);
+    // const data = await axios(config);
+    console.log("products", products);
     dispatch({ type: productsActions.GET_PRODUCTS_LISTINGS, data: products });
     dispatch({ type: productsActions.SET_LOADER_FALSE });
   };
