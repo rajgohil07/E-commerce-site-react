@@ -1,5 +1,3 @@
-.myCartWrapper .leftPart {}
-
 .myCartWrapper .leftPart .leftImagePart {
     width: 100%;
     height: 100%;
@@ -10,6 +8,7 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+    cursor: pointer;
 }
 
 .leftPart .quantity {
@@ -63,9 +62,11 @@
     color: green;
 }
 
-.myCartWrapper .rightPart>h3 {
+.myCartWrapper .rightPart .myCartProductTitle {
     font-size: 32px;
     margin: 0 0 1rem 0;
+    cursor: pointer;
+    display: inline-block !important;
 }
 
 .myCartWrapper .rightPart>p {

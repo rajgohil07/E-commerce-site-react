@@ -8,11 +8,16 @@ import {
   myCartProductActionType,
 } from "../../../Redux/MyCart/MyCartActionTypes";
 import { OrderLimitTooltip } from "../../OrderLimitTooltip/OrderLimitTooltip";
+import { useNavigate } from "react-router-dom";
+import { publicURLPath } from "../../../Constants/PathConstants";
+import { BootstrapTooltip } from "../../BootstrapTooltip/BootstrapTooltip";
 
 export const MyCartProductList = ({ data }) => {
   const dispatch = useDispatch();
 
   const cartState = useSelector((state) => state.myCart.myProductsData);
+
+  const navigation = useNavigate();
 
   // Handle Decrement Quantity
   const handleDecrementQty = () => {
@@ -43,65 +48,123 @@ export const MyCartProductList = ({ data }) => {
       <Grid item xs={12} md={4}>
         <div className="leftPart">
           <div className="leftImagePart">
-            <img
-              src={data.productInfo.thumbnail}
-              alt={`Thumbnail of ${data.productInfo.title}`}
-            />
+            <BootstrapTooltip
+              title={`Click to show the ${data.productInfo.title} product`}
+              placement="top"
+              arrow
+            >
+              <img
+                src={data.productInfo.thumbnail}
+                alt={`Thumbnail of ${data.productInfo.title}`}
+                onClick={() =>
+                  navigation(`${publicURLPath}/product/${data.productInfo.id}`)
+                }
+              />
+            </BootstrapTooltip>
           </div>
           <div className="quantity">
-            <button
-              disabled={data.quantity === 0}
-              className="quantityButton quantityButtonMinus"
-              onClick={() => handleDecrementQty()}
+            <BootstrapTooltip
+              title={`Click to remove ${data.productInfo.title} quantity`}
+              placement="bottom"
+              arrow
             >
-              -
-            </button>
+              <button
+                disabled={data.quantity === 0}
+                className="quantityButton quantityButtonMinus"
+                onClick={() => handleDecrementQty()}
+              >
+                -
+              </button>
+            </BootstrapTooltip>
             <h3>Qty: {data.quantity}</h3>
-            <button
-              disabled={data.quantity >= 3}
-              className="quantityButton quantityButtonPlus"
-              onClick={() => handleIncrementQty()}
+            <BootstrapTooltip
+              title={`Click to add ${data.productInfo.title} quantity`}
+              placement="bottom"
+              arrow
             >
-              +
-            </button>
+              <button
+                disabled={data.quantity >= 3}
+                className="quantityButton quantityButtonPlus"
+                onClick={() => handleIncrementQty()}
+              >
+                +
+              </button>
+            </BootstrapTooltip>
             <OrderLimitTooltip title="Due to high demand, you cannot add more than 3 quantities of this product." />
           </div>
         </div>
       </Grid>
       <Grid item xs={12} md={8}>
         <div className="rightPart">
-          <h3>{data.productInfo.title}</h3>
-          <p>{data.productInfo.description}.</p>
-          <div className="myCartRating">
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+          <BootstrapTooltip
+            title={`Click to show the ${data.productInfo.title} product`}
+            placement="right"
+            arrow
+          >
+            <h3
+              className="myCartProductTitle"
+              onClick={() =>
+                navigation(`${publicURLPath}/product/${data.productInfo.id}`)
+              }
             >
-              <span>{data.productInfo.rating}</span>
-              <AiFillStar />
-            </Box>
-          </div>
+              {data.productInfo.title}
+            </h3>
+          </BootstrapTooltip>
+          <p>{data.productInfo.description}.</p>
+          <BootstrapTooltip
+            title={`Rating of the ${data.productInfo.title} product`}
+            placement="right"
+            arrow
+          >
+            <div className="myCartRating">
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <span>{data.productInfo.rating}</span>
+                <AiFillStar />
+              </Box>
+            </div>
+          </BootstrapTooltip>
           <div className="pricer">
-            <span className="originalAmount">
-              $
-              {(
-                ((data.productInfo.price *
-                  (100 + data.productInfo.discountPercentage)) /
-                  100 || 0) * Number(data.quantity || 1)
-              ).toFixed(0)}
-            </span>
-            <span className="discountedAmount">
-              $
-              {(
-                (data.productInfo.price || 0) * Number(data.quantity || 1)
-              ).toFixed(0)}
-            </span>
-            <span className="discountPercentage">
-              {data.productInfo.discountPercentage}% off
-            </span>
+            <BootstrapTooltip
+              title={`MRP of ${data.productInfo.title} product`}
+              placement="bottom"
+              arrow
+            >
+              <span className="originalAmount">
+                $
+                {(
+                  ((data.productInfo.price *
+                    (100 + data.productInfo.discountPercentage)) /
+                    100 || 0) * Number(data.quantity || 1)
+                ).toFixed(0)}
+              </span>
+            </BootstrapTooltip>
+            <BootstrapTooltip
+              title={`Discounted price of ${data.productInfo.title} product`}
+              placement="bottom"
+              arrow
+            >
+              <span className="discountedAmount">
+                $
+                {(
+                  (data.productInfo.price || 0) * Number(data.quantity || 1)
+                ).toFixed(0)}
+              </span>
+            </BootstrapTooltip>
+            <BootstrapTooltip
+              title={`Discounted percentage of ${data.productInfo.title} product`}
+              placement="bottom"
+              arrow
+            >
+              <span className="discountPercentage">
+                {data.productInfo.discountPercentage}% off
+              </span>
+            </BootstrapTooltip>
           </div>
         </div>
       </Grid>

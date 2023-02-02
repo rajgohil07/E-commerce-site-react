@@ -28,7 +28,7 @@
 .productDetails {
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .productDetails>h1 {

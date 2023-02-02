@@ -1,6 +1,6 @@
 import "./MyCart.css";
 import { useSelector } from "react-redux";
-import { Box, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { MyCartProductList } from "./MyCartProductList/MyCartProductList";
 import { ProductPriceQuestionMark } from "../Product/ProductPriceQuestionMark/ProductPriceQuestionMark";
 import { BootstrapTooltip } from "../BootstrapTooltip/BootstrapTooltip";

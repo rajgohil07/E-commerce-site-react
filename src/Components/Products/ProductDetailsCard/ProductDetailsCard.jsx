@@ -11,6 +11,7 @@ import {
   Grid,
 } from "@mui/material";
 import { BootstrapTooltip } from "../../BootstrapTooltip/BootstrapTooltip";
+import { publicURLPath } from "../../../Constants/PathConstants";
 
 export const ProductDetailsCard = ({
   id,
@@ -25,7 +26,7 @@ export const ProductDetailsCard = ({
   return (
     <BootstrapTooltip
       onClick={() => {
-        navigate(`/product/${id}`);
+        navigate(`${publicURLPath}/product/${id}`);
       }}
       title={`Click to buy ${title}`}
       TransitionComponent={Zoom}
