@@ -1,0 +1,19 @@
+.snackIconColorSuccess div {
+    color: white;
+    background-color: #1b8b1b
+}
+
+.snackIconColorSuccess div svg {
+    color: white !important;
+    background-color: #1b8b1b !important
+}
+
+.snackIconColorError div {
+    color: white;
+    background-color: #cf4318
+}
+
+.snackIconColorError div svg {
+    color: white !important;
+    background-color: #cf4318 !important
+}

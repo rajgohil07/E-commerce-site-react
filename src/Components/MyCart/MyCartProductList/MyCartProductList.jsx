@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { publicURLPath } from "../../../Constants/PathConstants";
 import { BootstrapTooltip } from "../../BootstrapTooltip/BootstrapTooltip";
 
-export const MyCartProductList = ({ data }) => {
+export const MyCartProductList = ({ data, setSnackbar, snackMessageRef }) => {
   const dispatch = useDispatch();
 
   const cartState = useSelector((state) => state.myCart.myProductsData);
@@ -43,6 +43,25 @@ export const MyCartProductList = ({ data }) => {
     );
   };
 
+  const snackCaseMessageType = Object.freeze({
+    ADD: "add",
+    REMOVE: "remove",
+  });
+
+  // Show snack case message
+  const handleSnackCaseMessage = (title, quantity, type) => {
+    console.log("quantity :>> ", quantity);
+    if (type === snackCaseMessageType.ADD) {
+      snackMessageRef.current = `Quantity of ${title} has been increased!`;
+    } else {
+      snackMessageRef.current = `Quantity of ${title} has been decreased!`;
+      if (quantity === 0) {
+        snackMessageRef.current = `${title} has been removed from your cart!`;
+      }
+    }
+    setSnackbar(true);
+  };
+
   return (
     <>
       <Grid item xs={12} md={4}>
@@ -71,7 +90,14 @@ export const MyCartProductList = ({ data }) => {
               <button
                 disabled={data.quantity === 0}
                 className="quantityButton quantityButtonMinus"
-                onClick={() => handleDecrementQty()}
+                onClick={() => {
+                  handleSnackCaseMessage(
+                    data.productInfo.title,
+                    data.quantity,
+                    snackCaseMessageType.REMOVE
+                  );
+                  handleDecrementQty();
+                }}
               >
                 -
               </button>
@@ -85,7 +111,14 @@ export const MyCartProductList = ({ data }) => {
               <button
                 disabled={data.quantity >= 3}
                 className="quantityButton quantityButtonPlus"
-                onClick={() => handleIncrementQty()}
+                onClick={() => {
+                  handleSnackCaseMessage(
+                    data.productInfo.title,
+                    data.quantity,
+                    snackCaseMessageType.ADD
+                  );
+                  handleIncrementQty();
+                }}
               >
                 +
               </button>

@@ -9,27 +9,29 @@ import {
 import { OrderLimitTooltip } from "../../OrderLimitTooltip/OrderLimitTooltip";
 import { Box } from "@mui/material";
 
-export const AddToCartButton = ({ buttonName, productData }) => {
+export const AddToCartButton = ({ buttonName, productData, setSnackbar }) => {
   const dispatch = useDispatch();
 
   const cartState = useSelector((state) => state.myCart.myProductsData);
-
-  const handleAddToCartEvent = () => {
-    return dispatch(
-      alterTheValueOfMyCart(
-        productData,
-        myCartProductActionType.ADD,
-        cartState,
-        myCartActionTypes.ALTER_PRODUCT_TO_MY_CART
-      )
-    );
-  };
-
   const findProduct = cartState.find(
     (data) => data.productInfo.id === productData.id
   );
 
   const isButtonDisabled = Number(findProduct?.quantity) >= 3;
+
+  const handleAddToCartEvent = () => {
+    if (!isButtonDisabled) {
+      dispatch(
+        alterTheValueOfMyCart(
+          productData,
+          myCartProductActionType.ADD,
+          cartState,
+          myCartActionTypes.ALTER_PRODUCT_TO_MY_CART
+        )
+      );
+      return setSnackbar(true);
+    }
+  };
 
   return (
     <Box

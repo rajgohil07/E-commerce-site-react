@@ -3,6 +3,11 @@
     width: 80%;
 }
 
+.mainProductParentWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 .swiper {
     height: 25rem;
     background-color: #cac7c7;
