@@ -85,4 +85,8 @@
     .productTable .productInfoTitle {
         width: 35%;
     }
+
+    .productWrapper {
+        width: 90%;
+    }
 }
