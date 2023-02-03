@@ -115,7 +115,9 @@ export const Product = () => {
                   readOnly
                 />
                 <span>
-                  <p>({productData.rating} ratings)</p>
+                  <p className="ratingParagraph">
+                    ({productData.rating} ratings)
+                  </p>
                 </span>
               </Box>
 

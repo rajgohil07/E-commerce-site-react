@@ -36,6 +36,10 @@
     justify-content: flex-end;
 }
 
+.productDetails .ratingParagraph {
+    margin: 0.4rem 0;
+}
+
 .productDetails>h1 {
     margin-bottom: 0rem;
 }
@@ -88,5 +92,9 @@
 
     .productWrapper {
         width: 90%;
+    }
+
+    .productDetails .ratingParagraph {
+        margin: 0.4rem 0;
     }
 }

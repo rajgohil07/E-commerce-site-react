@@ -43,7 +43,7 @@ export const AddToCartButton = ({ buttonName, productData }) => {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        marginTop: "1rem",
+        marginTop: "0.5rem",
       }}
     >
       <div
